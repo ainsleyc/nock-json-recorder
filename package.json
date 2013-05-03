@@ -1,6 +1,6 @@
 { "name" : "nock-json-recorder" , "description" : "HTTP Server mocking for Node.js"
 , "tags" : ["Mock", "HTTP", "testing", "isolation"]
-, "version" : "0.18.2"
+, "version" : "0.18.3"
 , "author" : "Ainsley Chong <ainsley.chong@gmail.com>"
 , "contributors" :
   [ {"name": "Roly Fentanes" }
