@@ -5,5 +5,6 @@ module.exports.recorder = {
     rec  : recorder.record
   , clear   : recorder.clear
   , play : recorder.outputs
+  , playJson : recorder.jsonOutputs
 };
 module.exports.restore = recorder.restore;

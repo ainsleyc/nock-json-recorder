@@ -70,3 +70,31 @@ tap.test('when request body is json, it goes unstringified', function(t) {
 
   request.end(JSON.stringify(payload));
 });
+
+tap.test('makes available the json formatted response data', function(t) {
+  var payload = {a: 1, b: true};
+  var options = {
+    method: 'POST',
+    host: 'www.google.com',
+    path: '/', port: 80
+  };
+
+  nock.restore();
+  nock.recorder.clear();
+  nock.recorder.rec(true);
+  var responses = nock.recorder.playJson();
+
+  var request = http.request(options, function(res) {
+    res.resume();
+    res.once('end', function() {
+      ret = nock.recorder.play();
+      t.ok(ret.length >= 1);
+      ret = ret[1] || ret[0];
+      t.equal(ret.indexOf("\nnock('http://www.google.com')\n  .post('/', {\"a\":1,\"b\":true})\n  .reply("), 0);
+      t.end();
+    })
+  });
+
+  console.log(responses);
+  request.end(JSON.stringify(payload));
+});
